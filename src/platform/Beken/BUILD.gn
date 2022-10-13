@@ -57,7 +57,12 @@ static_library("Beken") {
     "${chip_root}/src/setup_payload",
   ]
 
-  public = [ "${chip_root}/src/credentials/DeviceAttestationCredsProvider.h" ]
+  public = [ 
+    "${chip_root}/src/credentials/DeviceAttestationCredsProvider.h",
+    "${chip_root}/src/platform/Beken/OTAImageProcessorImpl.h",
+    "${chip_root}/src/platform/Beken/BekenConfig.h",
+    "${chip_root}/src/platform/Beken/FactoryDataProvider.h",
+  ]
 
   public_deps = [
     "${chip_root}/src/crypto",
