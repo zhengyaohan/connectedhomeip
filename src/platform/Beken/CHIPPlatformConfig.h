@@ -74,6 +74,9 @@
 #define CHIP_CONFIG_ENABLE_PROVISIONING_BUNDLE_SUPPORT 0
 
 // ==================== General Configuration Overrides ====================
+#ifndef CHIP_CONFIG_MAX_FABRICS
+#define CHIP_CONFIG_MAX_FABRICS 5
+#endif // CHIP_CONFIG_MAX_FABRICS
 
 #ifndef CHIP_CONFIG_MAX_PEER_NODES
 #define CHIP_CONFIG_MAX_PEER_NODES 16

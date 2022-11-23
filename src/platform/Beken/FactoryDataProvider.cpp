@@ -22,11 +22,13 @@
 #include <lib/support/Base64.h>
 #include <lib/support/BytesToHex.h>
 #include <lib/support/Span.h>
+#include <platform/Beken/BekenConfig.h>
 #include <platform/Beken/CHIPDevicePlatformConfig.h>
 #include <platform/CHIPDeviceConfig.h>
 #include <platform/CHIPDeviceLayer.h>
 #include <platform/ConnectivityManager.h>
-#include <platform/internal/GenericConfigurationManagerImpl.ipp>
+
+// #include <platform/internal/GenericConfigurationManagerImpl.ipp>
 
 using namespace ::chip::DeviceLayer::Internal;
 
@@ -236,9 +238,13 @@ CHIP_ERROR FactoryDataProvider::GetSetupDiscriminator(uint16_t & setupDiscrimina
     CHIP_ERROR err = CHIP_DEVICE_ERROR_CONFIG_NOT_FOUND;
     uint32_t val;
 
+    err = BekenConfig::ReadConfigValue(BekenConfig::kConfigKey_SetupDiscriminator, val);
 #if defined(CHIP_DEVICE_CONFIG_USE_TEST_SETUP_DISCRIMINATOR) && CHIP_DEVICE_CONFIG_USE_TEST_SETUP_DISCRIMINATOR
-    val = CHIP_DEVICE_CONFIG_USE_TEST_SETUP_DISCRIMINATOR;
-    err = CHIP_NO_ERROR;
+    if(err == CHIP_DEVICE_ERROR_CONFIG_NOT_FOUND)
+    {
+        val = CHIP_DEVICE_CONFIG_USE_TEST_SETUP_DISCRIMINATOR;
+        err = CHIP_NO_ERROR;
+    }
 #endif // defined(CHIP_DEVICE_CONFIG_USE_TEST_SETUP_DISCRIMINATOR) && CHIP_DEVICE_CONFIG_USE_TEST_SETUP_DISCRIMINATOR
 
     setupDiscriminator = static_cast<uint16_t>(val);
@@ -317,9 +323,13 @@ CHIP_ERROR FactoryDataProvider::GetSetupPasscode(uint32_t & setupPasscode)
 {
     CHIP_ERROR err = CHIP_DEVICE_ERROR_CONFIG_NOT_FOUND;
 
+    err = BekenConfig::ReadConfigValue(BekenConfig::kConfigKey_SetupPinCode, setupPasscode);
 #if defined(CHIP_DEVICE_CONFIG_USE_TEST_SETUP_PIN_CODE) && CHIP_DEVICE_CONFIG_USE_TEST_SETUP_PIN_CODE
-    setupPasscode = CHIP_DEVICE_CONFIG_USE_TEST_SETUP_PIN_CODE;
-    err           = CHIP_NO_ERROR;
+    if(err == CHIP_DEVICE_ERROR_CONFIG_NOT_FOUND)
+    {
+        setupPasscode = CHIP_DEVICE_CONFIG_USE_TEST_SETUP_PIN_CODE;
+        err           = CHIP_NO_ERROR;
+    }
 #endif // defined(CHIP_DEVICE_CONFIG_USE_TEST_SETUP_PIN_CODE) && CHIP_DEVICE_CONFIG_USE_TEST_SETUP_PIN_CODE
 
     return err;

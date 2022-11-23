@@ -67,6 +67,8 @@
 //    WARNING: This option makes it possible to circumvent basic chip security functionality.
 //    Because of this it SHOULD NEVER BE ENABLED IN PRODUCTION BUILDS.
 //
+#define CHIP_DEVICE_CONFIG_BLE_ADVERTISING_INTERVAL_CHANGE_TIME 300000
+
 #define CHIP_DEVICE_CONFIG_ENABLE_TEST_SETUP_PARAMS 1
 
 #define CONFIG_RENDEZVOUS_MODE 6

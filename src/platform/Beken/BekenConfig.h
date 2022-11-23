@@ -18,7 +18,8 @@
 
 #pragma once
 
-#include <platform/internal/CHIPDeviceLayerInternal.h>
+// #include <platform/internal/CHIPDeviceLayerInternal.h>
+#include <lib/core/CHIPError.h>
 
 #include <string.h>
 namespace chip {
