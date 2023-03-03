@@ -278,6 +278,7 @@ CHIP_ERROR FactoryDataProvider::GetSetupDiscriminator(uint16_t & setupDiscrimina
     err = CHIP_NO_ERROR;
 #else
     ReturnErrorOnFailure(BekenConfig::ReadConfigValue(BekenConfig::kConfigKey_SetupDiscriminator, val));
+    err = CHIP_NO_ERROR;
 #endif // defined(CHIP_DEVICE_CONFIG_USE_TEST_SETUP_DISCRIMINATOR) && CHIP_DEVICE_CONFIG_USE_TEST_SETUP_DISCRIMINATOR
 
     setupDiscriminator = static_cast<uint16_t>(val);
