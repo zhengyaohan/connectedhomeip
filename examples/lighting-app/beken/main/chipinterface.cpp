@@ -20,6 +20,8 @@
 #include "driver/gpio.h"
 #include "Server.h"
 
+#include "task.h"
+
 #include <common/BekenAppServer.h>
 #include <common/CHIPDeviceManager.h>
 
@@ -219,11 +221,14 @@ extern "C" void ChipTest(void)
         ChipLogProgress(DeviceLayer, "DeviceManagerInit() - OK\r\n");
     }
     chip::DeviceLayer::PlatformMgr().ScheduleWork(InitServer, 0);
-
+#if 0
     while (true)
         vTaskDelay(pdMS_TO_TICKS(50)); // Just server the application event handler
     ChipLogProgress(SoftwareUpdate, "Exited");
     return;
+#else
+vTaskDelete(NULL);
+#endif
 }
 
 bool lowPowerClusterSleep()
