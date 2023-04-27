@@ -93,6 +93,7 @@ CHIP_ERROR BekenWiFiDriver::RevertConfiguration()
 {
     ChipLogProgress(NetworkProvisioning, "BekenWiFiDriver::RevertConfiguration\r\n");
     mStagingNetwork = mSavedNetwork;
+    mpConnectCallback = nullptr;
     return CHIP_NO_ERROR;
 }
 
